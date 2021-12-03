@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Card from "./components/Card/Card";
+import Cards from "./components/Card/Cards";
 import Filter from "./components/Filter/Filter";
 import SearchBox from "./components/SearchBox/SearchBox";
+import Box from '@mui/material/Box';
+import Image from "material-ui-image";
+import TextField from "@mui/material/TextField";
+import { ShowMore } from "./components/ShowMore/ShowMore";
 
 const App = () => {
     
@@ -32,31 +36,18 @@ const App = () => {
     
     return (
         <>
-            <div className="Container">
-                <div className="Box">
-                    <img
-                        className="Image"
-                        src="https://picjumbo.com/wp-content/uploads/bowl-of-bibimbap-2210x1475.jpg"
-                        alt="vegetarian dish"
-                    />
-                </div>
-                <div className="Box Box-searchBox">
-                    <SearchBox />
-                </div>
-            </div>
-            <div className="Box Box-main">
-                <div>
-                    <Filter />
-                </div>
-                <div className="Box Box__Card">
-                    <Card 
-                        chows={chows}
-                    />
-                </div>
-            </div>
-            <div className="Box">
-                <button className="Button Button--contained Button--contained--sm">Load more</button>
-            </div>
+            <Box sx={{height: "90vh"}}>
+                <Image 
+                    src="https://thumbs.dreamstime.com/b/assortment-indian-recipes-food-various-traditional-cuisine-top-view-copy-space-panorama-banner-202152020.jpg"
+                    imageStyle={{ width: '100vw', height: '90vh' }}
+                />                    
+            </Box>
+            <SearchBox />
+            <Box>
+                <Filter />
+                <Cards/>
+            </Box>
+            <ShowMore/>
         </>
     );
 };
