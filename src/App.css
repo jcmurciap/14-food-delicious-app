@@ -57,6 +57,7 @@ html, body {
 .Image {
     height: 300px;
     opacity: 0.5;
+    width: 100vw;
 }
 .Button--contained--sm{
     width: auto;
