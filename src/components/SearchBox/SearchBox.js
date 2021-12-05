@@ -11,7 +11,7 @@ const SearchBox = () => {
             variant="outlined"
             sx={{ 
                 width: '40%', 
-                top: -300, left: 450, 
+                top: -300, left: 430, 
                 backgroundColor: "whitesmoke",
                 borderRadius: '5px',
                 boxShadow: 100,
