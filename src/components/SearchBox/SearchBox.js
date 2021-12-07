@@ -15,7 +15,7 @@ const SearchBox = () => {
                 backgroundColor: "whitesmoke",
                 borderRadius: '5px',
                 boxShadow: 100,
-                fontFamily: 'Open Sans', // TODO
+                fontFamily: 'Open Sans', // TODO change
             }} 
         />
     );
