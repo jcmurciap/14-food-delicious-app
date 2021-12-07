@@ -3,62 +3,63 @@ import Cards from "./components/Card/Cards";
 import Filter from "./components/Filter/Filter";
 import SearchBox from "./components/SearchBox/SearchBox";
 import Box from '@mui/material/Box';
-import Image from "material-ui-image";
+import Paper from '@mui/material/Paper';
 import ShowMore from "./components/ShowMore/ShowMore";
 
 const App = () => {
     
-    const URL = "https://themealdb.com/api/json/v1/1/search.php?s";
-    const [dishes, setDishes] = useState({ data:[], loading:true, error:null });
-    const [categories, setCategories] = useState([]);
-    const [areas, setAreas] = useState([]);
+    const url = "https://themealdb.com/api/json/v1/1/search.php?s";
+    const [dishes, setDishes] = useState({data:[], loading:true, error:null});    
+    const [categories, setCategories] = useState([]); 
+    const [areas, setAreas] = useState([]);           
 
-    const startGetData = async(url) => {
+    const startGetData = async() => {
         try {
             setDishes({...dishes, loading:true});
             const body = await fetch(url,{'Content-Type': 'application/json'});
             const resp = await body.json();
             const { meals } = resp;
             setDishes({...dishes, data:meals, loading:false});
-        } catch (error) {
-            setDishes({...dishes, loading:false, error:error});
-        }
 
-        let category = [];
-        dishes.data.forEach(
-            dish => {
-                category.push(dish.strCategory)
-        });
-        setCategories([...new Set(category)].map(i => ({
-            slug: i,
-            isActive: false
-        })));    
+            const category = [];
+            meals.forEach(
+                meal => {
+                    category.push(meal.strCategory)
+            });
+            setCategories([...new Set(category)].map(i => ({
+                slug: i,
+                isActive: false
+            })));
+            const area = [];
+            meals.forEach(
+                meal => {
+                    area.push(meal.strArea)
+            });
+            setAreas([...new Set(area)].map(i => ({
+                slug: i,
+                isActive: false
+            })));
         
-        let area = [];
-        dishes.data.forEach(
-            dish => {
-                area.push(dish.strArea)
-        });
-        setAreas([...new Set(area)].map(i => ({
-            slug: i,
-            isActive: false
-        })));
+        } catch (error) {
+            setDishes({...dishes, loading:false, error});
+        };
     };
-    
+            
     useEffect(() => {
         (async() => {
-            await startGetData(URL);
+            await startGetData();
         })();
     }, []);
     
     return (
         <>
-            <Box sx={{height: "90vh"}}>
-                <Image 
+            <Paper sx={{height: "90vh"}}>
+                <img 
+                    alt="background-meal-dish"
                     src="https://thumbs.dreamstime.com/b/assortment-indian-recipes-food-various-traditional-cuisine-top-view-copy-space-panorama-banner-202152020.jpg"
-                    imageStyle={{ width: '98vw', height: '90vh' }}
+                    width="100%" height="auto"
                 />                    
-            </Box>
+            </Paper>
             <SearchBox />
             <Box sx={{ display: "flex", maxWidth: "1100px", marginX: "auto", justifyContent:"center"}}>
                 <Filter 
