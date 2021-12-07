@@ -10,10 +10,7 @@ import Box from '@mui/material/Box';
 import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
-const Cards = (props) => {
-    
-    const { dishes } = props;
-
+const Cards = ({ dishes }) => {
     return (
         <Box 
             sx={{ 
