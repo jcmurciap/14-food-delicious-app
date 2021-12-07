@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -17,6 +19,9 @@ const Accordion = styled((props) => (
         '&:before': {
             display: 'none',
         },
+    marginRight: "20px",
+    padding: "5px",
+    width: "200px"
     }));
 
 const AccordionSummary = styled((props) => (
@@ -44,9 +49,11 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 
-const CustomizedAccordion = () => {
-    const [expanded, setExpanded] = React.useState('panel1');
+const Filter = (props) => {
 
+    const [expanded, setExpanded] = useState('panel1');
+    const { categories,areas } = props;
+    
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
@@ -59,17 +66,30 @@ const CustomizedAccordion = () => {
             </AccordionSummary>
             <AccordionDetails>
                 <FormGroup>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Category item" />
+                    {categories.map(c => 
+                        <FormControlLabel 
+                            control={<Checkbox />} 
+                            label={c.slug}
+                            key={c.slug}
+                        />
+                    )}
                 </FormGroup>
             </AccordionDetails>
             </Accordion>
+            
             <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
                     <Typography>Area</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Area item" />
+                        {areas.map(a => 
+                            <FormControlLabel 
+                                control={<Checkbox />} 
+                                label={a.slug}
+                                key={a.slug}
+                            />
+                        )}
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
@@ -77,4 +97,4 @@ const CustomizedAccordion = () => {
     );
 };
 
-export default CustomizedAccordion;
+export default Filter;
