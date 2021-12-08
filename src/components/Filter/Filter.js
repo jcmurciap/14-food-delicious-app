@@ -51,11 +51,17 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const Filter = (props) => {
 
+    const { categories, areas, handleSetCategories, handleSetAreas } = props;
+    
     const [expanded, setExpanded] = useState('panel1');
-    const { categories,areas } = props;
     
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
+    };
+
+    const handleFilterClick = (event) => {
+        handleSetCategories(event.target.value);
+        handleSetAreas(event.target.value);
     };
 
     return (
@@ -66,11 +72,13 @@ const Filter = (props) => {
             </AccordionSummary>
             <AccordionDetails>
                 <FormGroup>
-                    {categories.map(c => 
+                    {categories.map(category => 
                         <FormControlLabel 
                             control={<Checkbox />} 
-                            label={c.slug}
-                            key={c.slug}
+                            label={category.slug}
+                            key={category.slug}
+                            value={category.slug}
+                            onClick={handleFilterClick} 
                         />
                     )}
                 </FormGroup>
@@ -83,11 +91,13 @@ const Filter = (props) => {
                 </AccordionSummary>
                 <AccordionDetails>
                     <FormGroup>
-                        {areas.map(a => 
+                        {areas.map(area => 
                             <FormControlLabel 
                                 control={<Checkbox />} 
-                                label={a.slug}
-                                key={a.slug}
+                                label={area.slug}
+                                key={area.slug}
+                                value={area.slug}
+                                onClick={handleFilterClick}
                             />
                         )}
                     </FormGroup>

@@ -39,12 +39,37 @@ const App = () => {
                 slug: i,
                 isActive: false
             })));
-        
         } catch (error) {
             setDishes({...dishes, loading:false, error});
         };
     };
-            
+    
+    const handleSetCategories = (currentCategory) => {
+        const activeCategories = categories.map(
+            category => 
+                (category.slug === currentCategory) 
+                    ? {...category, isActive: category.isActive = !category.isActive} 
+                    : category
+        );
+        setCategories(activeCategories);
+    };
+
+    const handleSetAreas = (currentArea) => {
+        let activeAreas = areas.map(
+            area => 
+            (area.slug === currentArea)
+            ? {...area, isActive: area.isActive = !area.isActive}
+            : area
+        );
+        setAreas(activeAreas);
+    };
+
+    // const fetchActiveData = () => {
+        
+    // };
+
+
+
     useEffect(() => {
         (async() => {
             await startGetData();
@@ -65,6 +90,8 @@ const App = () => {
                 <Filter 
                     categories={categories}
                     areas={areas}
+                    handleSetCategories={handleSetCategories}
+                    handleSetAreas={handleSetAreas}
                 />
                 <Cards dishes={dishes}/>
             </Box>

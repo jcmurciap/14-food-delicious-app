@@ -1,0 +1,24 @@
+{
+    "books": [
+        {
+          "id": "1",
+          "name": "Camiseta Mescla",
+          "price": 28.8,
+          "parcelamento": [3, 9.33],
+          "color": "Cinza",
+          "image": "/img/img_2.png",
+          "size": ["M", "GG"],
+          "date": "1995-12-17"
+        },
+        {
+          "id": "2",
+          "name": "Saia em couro",
+          "price": 398.0,
+          "parcelamento": [5, 30],
+          "color": "Preto",
+          "image": "/img/img_3.png",
+          "size": ["G", "40"],
+          "date": "1996-12-17"
+        }
+    ] 
+}
